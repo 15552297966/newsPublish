@@ -1,0 +1,34 @@
+
+<div>
+    当前位置：文章管理>文章列表>文章详情
+</div>
+<div>
+    <h3>文章详情</h3>
+    <div>
+        <label>文章标题：</label>
+        <p><b>{{.article.ArtiName}}</b></p>
+    </div>
+    <div>
+        <label>文章类型：</label>
+        <p>{{.article.ArticleType.TypeName}}</p>  <!--我他娘的真是个人才，自己搞出来了 这个要在处理器
+                                                  qs.RelatedSel("ArticleType").Filter("Id",id).All(&article)多表联查-->
+    </div>
+    <div>
+        <label>文章内容：</label>
+        <p><img src="{{.article.Aimg}}">{{.article.Acontent}} </p>
+    </div>
+    <div>
+        <label>阅读次数：</label>
+        <p>{{.article.Acount}}</p>
+    </div>
+    <div>
+        <label>最近浏览：</label>
+        <p>{{range .users}} {{.Name}} &{{end}}</p>
+    </div>
+    <div>
+        <label>创建时间：</label>
+        <p>{{.article.Atime.Format "2006-01-02-15:04:05"}}</p>
+        <span>{{.errmsg}}</span>
+
+    </div>
+</div>

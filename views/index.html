@@ -1,0 +1,55 @@
+
+<div class="main_body" id="main_body">
+    <div class="breadcrub">
+        当前位置：文章管理>文章列表
+    </div>
+    <div class="pannel">
+        <span class="sel_label">请选择文章分类：</span>
+        <form method="get" action="/article/showArticleList" id="form">
+            <select name="select" id="select" class="sel_opt">
+                {{range .types}}
+                    {{if compare .TypeName $.typeName}}
+                        <option selected="true">{{.TypeName}}</option> <!--如果选中的类型就是当前类型，则默认选中，默认选中就是不跳转 -->
+                        {{else}}
+                        <option>{{.TypeName}}</option> <!--如果选中的类型不是当前类型，则不选中 -->
+                    {{end}}
+                {{end}}
+                <!--compare是beego默认封装的视图函数，比较A B，如果相同返回true，否则false -->
+                <!--在循环中.A是数据库的东西 $.A是后台的东西 -->
+            </select>
+        </form>
+
+        <table class="common_table">
+            <tr>
+                <th width="43">文章标题</th>
+                <th width="10">文章内容</th>
+                <th width="16">添加时间</th>
+                <th width="7">阅读量</th>
+                <th width="7">删除</th>
+                <th width="7">编辑</th>
+                <th width="10">文章类型</th>
+            </tr>
+            {{range $index,$val:= .articles}}
+                <tr>
+                    <td>{{$val.ArtiName}}</td>
+                    <td><a href="/article/showArticleDetail?articleId={{$val.Id}}">查看详情</a></td>
+                    <td>{{$val.Atime.Format "2006-01-02-15:04:05"}}</td>
+                    <td>{{$val.Acount}}</td>
+                    <td><a href="/article/deleteArticle?articleId={{$val.Id}}" class="dels">删除</a></td>
+                    <td><a href="/article/updateArticle?articleId={{$val.Id}}" >编辑</a></td>
+                    <td>{{$val.ArticleType.TypeName}}</td>
+                </tr>
+            {{end}}
+        </table>
+
+        <ul>
+            <li><a href="/article/showArticleList?pageIndex=1&select={{.typeName}}">首页</a></li>  <!--模仿get请求发数据 -->
+            <li><a href="/article/showArticleList?pageIndex={{.pageIndex|prepage}}&select={{.typeName}}">上一页</a></li>
+            <li><a href="/article/showArticleList?pageIndex={{nextpage .pageIndex .pageCount}}&select={{.typeName}}">下一页</a></li>
+            <li><a href="/article/showArticleList?pageIndex={{.pageCount}}&select={{.typeName}}">末页</a></li>
+            <li>共{{.count}}条记录/共{{.pageCount}}页/当前{{.pageIndex}}页</li>
+
+        </ul>
+
+    </div>
+</div>

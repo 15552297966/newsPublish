@@ -1,0 +1,29 @@
+
+<div id="main_body">
+    <div>
+        当前位置：文章管理>编辑文章
+    </div>
+    <div >
+        <form name=logon method="post" action="/article/updateArticle?articleId={{.article.Id}}" enctype="multipart/form-data">
+            <h3>编辑文章</h3>
+            <div >
+                <label>文章标题：</label>
+                <input type="text" name="articleName" value="{{.article.ArtiName}}">
+
+            </div>
+            <div>
+                <label>文章内容：</label>
+                <textarea name="content">{{.article.Acontent}}</textarea>
+            </div>
+            <div>
+                <label>上传图片：</label>
+                <img src="{{.article.Aimg}}">
+                <input type="file" name="uploadname">
+            </div>
+            <div>
+                <input type="submit" value="添 加">
+                <span>{{.errmsg}}</span>
+            </div>
+        </form>
+    </div>
+</div>

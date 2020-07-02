@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+    <script src="http://cdnnb.offcn.com/g2/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript">
+        window.onload = function (ev) {
+            $(".dels").click(function () {
+                if (!confirm("是否确认删除？")) {
+                    return false
+                }
+            })
+            $("#select").change(function () {
+                $("#form").submit()
+            })
+
+        }
+
+    </script>
+
+</head>
+<body>
+<div class="header">
+    <a href="#" class="logo fl"></a>
+    <a href="/article/logout" class="logout fr">退 出</a>
+</div>
+<div class="side_bar">
+    <div class="user_info">
+        <p>欢迎你 <em>{{.session}}</em></p>
+    </div>
+
+    <div class="menu_con">
+        <div class="first_menu active"><a href="javascript:;" class="icon02">文章管理</a></div>
+        <ul class="sub_menu show">
+            <li><a href="/article/showArticleList" class="icon031">文章列表</a></li>
+            <li><a href="/article/addArticle" class="icon032">添加文章</a></li>
+            <li><a href="/article/addType" class="icon033">添加分类</a></li>
+        </ul>
+    </div>
+</div>
+{{.LayoutContent}}
+
+</body>
+</html>
